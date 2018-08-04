@@ -8,11 +8,14 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
+const keys         = require('./config/keys');
+const session      = require("express-session");
+const MongoStore   = require("connect-mongo")(session);
 
 
 mongoose.Promise = Promise;
 mongoose
-  .connect('mongodb://localhost/guerra', {useMongoClient: true})
+  .connect('mongodb://localhost/guerra-local', {useMongoClient: true})
   .then(() => {
     console.log('Connected to Mongo!')
   }).catch(err => {
@@ -29,6 +32,18 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(
+  session({
+    secret: "our-passport-local-strategy-app",
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection,
+      ttl: 24 * 60 * 60 // 1 day
+    })
+  })
+);
+//require("./passport")(app);
 
 // Express View engine setup
 
@@ -43,7 +58,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
-
+hbs.registerPartials(__dirname + 'views/partials');
 
 
 // default value for title local
@@ -52,7 +67,10 @@ app.locals.title = 'Express - Generated with IronGenerator';
 
 
 const index = require('./routes/index');
+const passportRouter = require("./routes/passportRouter");
 app.use('/', index);
+app.use('/', passportRouter);
+
 
 
 module.exports = app;
