@@ -15,7 +15,7 @@ const MongoStore   = require("connect-mongo")(session);
 
 mongoose.Promise = Promise;
 mongoose
-  .connect('mongodb://localhost/guerra-local', {useMongoClient: true})
+  .connect(keys.mongodb.dbURI, {useMongoClient: true})
   .then(() => {
     console.log('Connected to Mongo!')
   }).catch(err => {
@@ -43,7 +43,8 @@ app.use(
     })
   })
 );
-//require("./passport")(app);
+
+  require("./passport")(app); //ya estas 
 
 // Express View engine setup
 
