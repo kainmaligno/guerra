@@ -1,0 +1,60 @@
+<h1>DISPARA TU MEJOR LUGAR DEL BARRIO</h1>
+<div class="user">
+    {{#if user}}
+    <h1>Guerrero Urbano: {{user.username}}</h1>
+
+    {{/if}}
+</div>
+
+<div class="newStand">
+    <form  class="form-control" action="/newFoodStand" method="POST" enctype="multipart/form-data">
+        <input  class="form-control"type="text" name="name" id="standName" placeholder="Nombre del Lugar">
+       
+        <textarea  class="form-control" name="description" id="description" cols="30" rows="10" placeholder="Descripcion"></textarea>
+        <br>
+        <input  class="form-control"required type="text" name="location[address]" id="address">
+        <br>
+        <select class="form-control" name="category" id="category">
+            <option value="Tacos">Tacos</option>
+            <option value="Tortas">Tortas</option>
+            <option value="Hamburguesas">Hamburguesas</option>
+            <option value="Hotdogs">Hotdogs</option>
+            <option value="Pizzas">Pizza</option>
+            <option value="Quesadilla">Quesadilla</option>
+            <option value="Pambazos">Pambazos</option>
+        </select>
+
+        <input type="hidden" name="location[coordinates][1]" id="lat">
+        <input type="hidden" name="location[coordinates][0]" id="lng">
+
+         <h2>Inmortaliza ese bello lugar lleno de grasa y tomale una foto</h2>
+      <br>
+      <input type="file" name="photo" value="uploadPic">
+      <button id="button" type="submit" value="savePlace">GUARDAR LUGAR</button>
+      <br>
+      * Informacion requerida
+    </form>
+</div>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzYCmApB3ysZNFYoP4TbhfHdNIhOroJtc&libraries=places"></script>
+{{!-- cambiar ruta de api --}}
+
+<script>
+  let address = document.getElementById('address')
+  let lat = document.getElementById('lat')
+  let lng = document.getElementById('lng')
+
+  function autoComplete(input, inputLat, inputLng) {
+    const dropdown = new google.maps.places.Autocomplete(input)
+
+    dropdown.addListener('place_changed', () => {
+      let place = dropdown.getPlace()
+      console.log(place)
+      lat.value = place.geometry.location.lat()
+      lng.value = place.geometry.location.lng()
+    })
+  }
+  autoComplete(address, lat, lng)
+
+</script> 

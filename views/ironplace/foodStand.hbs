@@ -1,0 +1,14 @@
+<section>
+    <h2>La guerra es aqui y ahora </h2>
+    <div class="show-stands">
+        {{#each foodstand}}
+        <div class="stand-container">
+            <header class="stand-header">
+                <img  class="img-stand" src="{{this.imgPath}}" alt="stands" width="100">
+                <p>{{this.standName}}</p>
+            </header>
+        </div>
+        {{/each}}
+    <a href="/foodStand/{{this._id}}">ver detalles</a>
+    </div>
+</section>

@@ -11,11 +11,12 @@ const path         = require('path');
 const keys         = require('./config/keys');
 const session      = require("express-session");
 const MongoStore   = require("connect-mongo")(session);
+const LocalStrategy      = require('passport-local').Strategy;
 
 
 mongoose.Promise = Promise;
 mongoose
-  .connect(keys.mongodb.dbURI, {useMongoClient: true})
+  .connect('mongodb://localhost/gerra', {useMongoClient: true})
   .then(() => {
     console.log('Connected to Mongo!')
   }).catch(err => {
@@ -66,12 +67,36 @@ hbs.registerPartials(__dirname + 'views/partials');
 app.locals.title = 'Express - Generated with IronGenerator';
 
 
-
+//routes 
 const index = require('./routes/index');
 const passportRouter = require("./routes/passportRouter");
 app.use('/', index);
 app.use('/', passportRouter);
 
+//routes places
+const foodStand = require('./routes/foodStand');
+app.use('/', foodStand);
 
+
+
+
+//errorhandler
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// error handler
+app.use((err, req, res, next) => {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
 
 module.exports = app;
