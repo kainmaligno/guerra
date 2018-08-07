@@ -41,10 +41,14 @@ router.get("/signup", (req, res, next) => {
 });
 
 
-router.post("/signup", uploadCloud,(req, res, next) => { 
+router.post("/signup", uploadCloud.single('photo'),(req, res, next) => { 
   const username = req.body.username;
   const password = req.body.password;
   const {firstName, lastName, email, birth, gender} = req.body;
+  // req.body.photoURL = req.file.url;
+  // req.body.aportedBy = req.user._id;
+  const imgPath = req.file.url;
+  const imgName = req.file.originalname;
 
   if (username === "" || password === "") {
     res.render("auth/signup", { message: "Indicate username and password" });
@@ -64,9 +68,9 @@ router.post("/signup", uploadCloud,(req, res, next) => {
         lastName,
         email,
         birth,
-        gender
-        // imgPath: req.file.url,
-        // imgName: req.file.originalname
+        gender,
+        imgPath,
+        imgName
       });
       return newUser.save();
     })

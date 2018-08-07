@@ -3,9 +3,9 @@ const cloudinaryStorage = require('multer-storage-cloudinary');
 const multer = require('multer');
 const keys = require('./keys');
 cloudinary.config({
-  cloud_name: keys.cloudinary.cloud_Name,
-  api_key: keys.cloudinary.api_key,
-  api_secret: keys.cloudinary.api_secret
+  cloud_name: 'drakarzamael',
+  api_key: '383474676418929',
+  api_secret: 'OxeGDjgcf4p2JD-BcYyMQPyW_Ic'
 });
 
 let storage = cloudinaryStorage({
@@ -17,6 +17,6 @@ let storage = cloudinaryStorage({
   }
 });
 
-const uploadCloud = multer({ storage: storage }).single('photo');
+const uploadCloud = multer({ storage: storage });
 
 module.exports = uploadCloud;
