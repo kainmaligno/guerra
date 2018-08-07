@@ -8,9 +8,10 @@ const bcryptSalt     = 10;
 const passport       = require("passport");
 //cloudinary
 const uploadCloud    = require('../config/cloudinary.js');
+
 //ensure logg
 const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
-
+ require('../config/passport');
 //login
 
 router.get("/login", (req, res, next) => {
@@ -93,9 +94,19 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-// router.get("/newFoodStand",ensureLoggedIn, (req, res) => {
-//   res.render("ironplace/newFoodStand", { user: req.user });
-// }); //end render
+//auth with google+
+
+router.get('/google', passport.authenticate('google', {
+  scope: ['https://www.googleapis.com/auth/plus.login',
+    'https://www.googleapis.com/auth/plus.profile.emails.read'
+  ]
+}));
+
+//callback route for google redirect to
+//hand control to passport to use code to grab profile info
+router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
+  res.redirect('/');
+});
 
 
 
