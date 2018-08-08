@@ -9,7 +9,7 @@ const foodStandSchema = new Schema({
         enum : ['Tacos', 'Tortas', 'Hamburguesas', 'Hotdogs', 'Pizzas','Quesadillas','Pambazos'],
         default : 'N/A'
     }],
-    location:       { type: { type: String }, coordinates: [Number] }
+    location:       { type: { type: String, default:"Point"}, coordinates: [Number] }
     }, {
     timestamps: {
         createdAt: "created_at",

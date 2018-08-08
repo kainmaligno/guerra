@@ -13,11 +13,13 @@ function isLoggedIn(req, res, next) {
 
 //nuevo lugar
 
+
+
 router.get("/newFoodStand", (req, res) => {
   res.render("ironplace/newFoodStand", { user: req.user });
 }); //end render
 
-router.post("/newFoodStand", (req, res, next) => {
+router.post("/newFoodStand",uploadCloud.single('photo'), (req, res, next) => {
   if (req.file) {
     req.body.photoURL = req.file.url;
     req.body.aportedBy = req.user._id;
