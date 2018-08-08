@@ -16,7 +16,7 @@ const LocalStrategy      = require('passport-local').Strategy;
 
 mongoose.Promise = Promise;
 mongoose
-  .connect('mongodb://localhost/gerra', {useMongoClient: true})
+  .connect(process.env.DB || 'mongodb://localhost/gerra', {useMongoClient: true})
   .then(() => {
     console.log('Connected to Mongo!')
   }).catch(err => {
