@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  console.log('IronGenerator JS imported successfully!');
+  console.log('Guerra de Puestos cargada Exitosmente');
 
 }, false);
 
@@ -11,7 +11,7 @@ var contador = 1;
  
 function main(){
 	$('.menu_bar').click(function(){
-		// $('nav').toggle(); 
+		 //$('nav').toggle(); 
  
 		if(contador == 1){
 			$('nav').animate({

@@ -69,4 +69,8 @@ section {
     float: right;
     font-size: 40px; } }
 
+#mapholder {
+  height: 400px;
+  width: 100%; }
+
 /*# sourceMappingURL=style.css.map */
