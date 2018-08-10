@@ -1,21 +1,30 @@
 
+
 <h1>DISPARA TU MEJOR LUGAR DEL BARRIO</h1>
 <div class="user">
     {{#if user}}
     <h1>Guerrero Urbano: {{user.username}}</h1>
-
     {{/if}}
 </div>
 
 <div class="newStand">
     <form  class="form-control" action="/newFoodStand" method="POST" enctype="multipart/form-data">
+        Nombre:
         <input  class="form-control"type="text" name="name" id="standName" placeholder="Nombre del Lugar">
-       
+        Descripcion:
         <textarea  class="form-control" name="description" id="description" cols="30" rows="10" placeholder="Descripcion"></textarea>
+        
         <br>
-        <div id="mapholder"></div>
-        <input type="hidden" name='lat' id="lat">
-        <input type="hidden" name="lng" id="lng">
+        <div id="mapInfo">
+                    Address:
+                <input class="form-control" type="text"  required name="location[address]" id="address">
+                <input type="" name='location[coordinates][1]'  disabled id="lat">
+                <input type="" name="location[coordinates][0]" disabled id="lng">
+                <br>
+               
+
+        </div>
+         <div id="map"></div>
         <select class="form-control" name="category" id="category">
             <option value="Tacos">Tacos</option>
             <option value="Tortas">Tortas</option>
@@ -27,13 +36,13 @@
         </select>
          <h2>Inmortaliza ese bello lugar lleno de grasa y tomale una foto</h2>
       <br>
-      <input type="file" name="photo" value="uploadPic">
+      <input type="file" name="photo" value="uploadPic" />
+      <br>
       <button id="button" type="submit" value="savePlace">GUARDAR LUGAR</button>
       <br>
-      * Informacion requerida
     </form>
 </div>
 
- <script type="text/javascript" src='/javascripts/maps.js'></script>
 
- 
+ <script    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-14hVewjP3BDtGFfOsy36obNYblwSapk&libraries=places"></script>
+ <script type="text/javascript" src='/javascripts/mapw3.js'></script>
