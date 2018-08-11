@@ -55,9 +55,6 @@ let title = "{{name}}"
 
 
 //obtiene la direccion mediante la api de maps y en el input de direccion 
-
-
-
 function autoComplete(input, inputLat, inputLng){
     const dropdown = new google.maps.places.Autocomplete(input)
   

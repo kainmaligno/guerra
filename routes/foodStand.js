@@ -11,43 +11,56 @@ function isLoggedIn(req, res, next) {
   return res.redirect("/login?next=/profile");
 }
 
-//nuevo lugar
-
-
+//nuevo lugar (vista)
 
 router.get("/newFoodStand", (req, res) => {
   res.render("ironplace/newFoodStand", { user: req.user });
 }); //end render
 
+//nuevo lugar (post)
 router.post("/newFoodStand",uploadCloud.single('photo'), (req, res, next) => {
-  if (req.file) {
-    req.body.photoURL = req.file.url;
-    req.body.aportedBy = req.user._id;
+  
+  const imgPath = req.file.url;
+  const imgName = req.file.originalname;
+  const {name, descritpion, category, address,longitude, latitude} = req.body;
+  console.log(longitude)
+  console.log(latitude)
+  let postedBy = req.user.id;
+  let location = { type: 'Point', coordinates: [longitude, latitude] };
+console.log(location.coordinates)
 
-    FoodStand.create(req.body)
-      .then(foodStand =>
-        User.findByIdAndUpdate(req.user._id, {
-          $push: { foodstand: foodstand._id }
-        })
-      )
-      .then(res.redirect("/private-page"))
-      .catch(error => {
-        console.log(error);
-      });
-  } else {
-    req.body.aportedBy;
-    FoodStand.create(req.body)
-      .then(foodStand =>
-        User.findByIdAndUpdate(req.user._id, {
-          $push: { foodstand: foodstand._id }
-        })
-      )
-      .then(res.redirect("/private-page"))
-      .catch(error => {
-        console.log(error);
-      });
-  }
-}); //end post
+  FoodStand.findOne({name}, "name", (err, place) => {
+    if( place !== null ) {
+      res.render('/newFoodStand', { message: "Ya existe weee" });
+      return;
+    }
+  });
+            
+  
+    
+    const newFoodStand = new FoodStand ({
+      postedBy:postedBy,
+      name: name,
+      descritpion,
+      category,
+      location: location,
+      address,
+      imgName,
+      imgPath
+    });
+
+    newFoodStand.save()
+    .then(() => {
+      res.redirect('/')
+    })
+    .catch(e => {
+      console.log(e)
+    })
+   
+  });
+   //end post
+
+
 
 router.get("/foodStand", (req, res) => {
   FoodStand.find()

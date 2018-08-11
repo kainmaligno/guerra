@@ -17,12 +17,10 @@
         <br>
         <div id="mapInfo">
                     Address:
-                <input class="form-control" type="text"  required name="location[address]" id="address">
-                <input type="" name='location[coordinates][1]'  disabled id="lat">
-                <input type="" name="location[coordinates][0]" disabled id="lng">
+                <input class="form-control" type="text"  required name="address" id="address">
+                <input type="hidden" name='latitude'   id="lat">
+                <input type="hidden" name="longitude"  id="lng">
                 <br>
-               
-
         </div>
          <div id="map"></div>
         <select class="form-control" name="category" id="category">
@@ -31,14 +29,19 @@
             <option value="Hamburguesas">Hamburguesas</option>
             <option value="Hotdogs">Hotdogs</option>
             <option value="Pizzas">Pizza</option>
-            <option value="Quesadilla">Quesadilla</option>
+            <option value="Quesadillas">Quesadillas</option>
             <option value="Pambazos">Pambazos</option>
+            <option value="Chilakillers">Chilakillers</option>
+            <option value="Otro">Otro</option>
         </select>
          <h2>Inmortaliza ese bello lugar lleno de grasa y tomale una foto</h2>
       <br>
       <input type="file" name="photo" value="uploadPic" />
       <br>
-      <button id="button" type="submit" value="savePlace">GUARDAR LUGAR</button>
+      <button id="button" type="submit">GUARDAR LUGAR</button>
+      {{#if message}}
+        <p>{{message}}</p>
+      {{/if}}
       <br>
     </form>
 </div>

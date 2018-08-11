@@ -1,16 +1,22 @@
 const mongoose  = require("mongoose");
-const {Schema}  = mongoose;
+const Schema  = mongoose.Schema;
 
 const foodStandSchema = new Schema({
-    name:           { type: String, required: true },
-    description:    { type: String, required: true },
+    name:           String,
+    description:  String,
+    imgPath: String,
+    imgName: String,
+    postedBy: {type: Schema.Types.ObjectId, ref: "User",},
     category:       [{
         type: String,
-        enum : ['Tacos', 'Tortas', 'Hamburguesas', 'Hotdogs', 'Pizzas','Quesadillas','Pambazos'],
+        enum : ['Tacos', 'Tortas', 'Hamburguesas', 'Hotdogs', 'Pizzas','Quesadillas','Pambazos','Chilakillers','Otro'],
         default : 'N/A'
     }],
-    location:       { type: { type: String, default:"Point"}, coordinates: [Number] }
-    }, {
+    
+    location:{ type:{ type:String, }, coordinates:[Number] },
+    address:String,
+    }
+     ,{
     timestamps: {
         createdAt: "created_at",
         updatedAt: "updated_at"
