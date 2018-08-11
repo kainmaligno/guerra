@@ -31,7 +31,8 @@ router.post("/newFoodStand", uploadCloud.single('photo'), (req, res, next) => {
       res.render('/newFoodStand', { message: "Ya existe weee" });
       return;
     }
-  });
+    
+   });
 
   const newFoodStand = new FoodStand({
     postedBy: postedBy,
@@ -57,54 +58,31 @@ router.post("/newFoodStand", uploadCloud.single('photo'), (req, res, next) => {
 
 
 
-router.get("/foodStand", (req, res) => {
-  FoodStand.find()
+router.get("/foodStand",  (req, res) => {
+  FoodStand.find().populate('postedBy')
     .then(food => {
-      res.render("ironplace/foodStand", { food});
+      //console.log(food);
+      res.render("ironplace/foodStand", {food, user: req.user});
     })
     .catch(error => {
       console.log(error);
     });
 }); //end render food
 
-router.get("foodStand/:id", (res, req) => {
-  const user = req.user;
-  console.log(user);
-  if (user === undefined) {
-    FoodStand.findById(req.params.id).then(foods => {
-      res.render("ironplace/foodDetails", { foods });
-    });
-  } else {
-    FoodStand.findById(req.params.id)
-      .populate("aportedBy")
-      .then(foodStand => {
-        let ctx = { foodStand };
-        if (user._id.toString() === foodStand.aportedBy._id.toString())
-          ctx = { foodStand, user };
 
-        res.render("ironplace/foodDetails", ctx);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-}); //end get
-
+router.get('/foodstand/:id', (req, res)=>{
+  FoodStand.find().populate('postedBy')
+  .then(detail => {
+    console.log(detail)
+    res.render('ironplace/foodDetails', { detail, id: req.params.id, user: req.user})
+  })
+  .catch(error => {
+    console.log(error)
+  });
+ 
+});//end detalles
 
 router.get('/removeStand/:id', (req, res) => {
-  Promise.all([
-    FoodStand.findByIdAndRemove(req.params.id),
-    User.findOneAndUpdate(
-      { foodstand: req.params.id },
-      { $pull: { foodstand: req.params.id } },
-      { new: true }
-    )
-  ])
-    .then(results => {
-      res.render("/foodStand")
-    })
-    .catch(error => {
-      console.log(error);
-    })
+  
 });
 module.exports = router;

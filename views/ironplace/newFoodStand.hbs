@@ -38,8 +38,9 @@
       <br>
       <input type="file" name="photo" value="uploadPic" />
       <br>
+        {{#if message}}
       <button id="button" type="submit">GUARDAR LUGAR</button>
-      {{#if message}}
+    
         <p>{{message}}</p>
       {{/if}}
       <br>

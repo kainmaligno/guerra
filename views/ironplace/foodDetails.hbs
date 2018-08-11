@@ -1,0 +1,18 @@
+
+
+<div id="map"></div>
+
+
+
+{{#if user}}
+<div>
+<p>Aportado por:
+    <i>{{user.username}}</i>
+    lo quieres
+<a id="borrar" onclick="return confirm('Estás seguro que deseas eliminar el Lugar?');" href="/removepl/{{place._id}}">borrar?</a>
+</p>
+</div>
+
+{{/if}}
+
+<script    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-14hVewjP3BDtGFfOsy36obNYblwSapk&libraries=places"></script>

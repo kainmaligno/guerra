@@ -5,6 +5,7 @@
   <title>{{title}}</title>
   <link rel='stylesheet' href='/stylesheets/style.css'>
   <link rel="stylesheet" href="/stylesheets/fonts.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -27,9 +28,8 @@
     <nav>
       
       <ul>
-        <li> <img src="/public/images/guerra.jpeg" alt="">
-      </li>
-       
+        
+ 
         <li>
           <a href="/">
             <span class="icon-home3"></span>Guerra de Puestos</a>
@@ -47,12 +47,14 @@
           <a href="/private-page">
             <span class="icon-users"></span>Perfil</a>
         </li>
-       
         {{else}}
+     
         <li>
           <a href="/login">
             <span class="icon-key"></span>Entra</a>
-        </li>{{/if}}
+        </li>
+      
+        {{/if}}
       </ul>
 
     </nav>

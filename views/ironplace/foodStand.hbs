@@ -6,7 +6,9 @@
             <header class="stand-header">
                 <img  class="img-stand" src="{{this.imgPath}}" alt="stands" width="100">
                 <p>{{this.name}}</p>
-                 <a href="/foodStand/{{this.id}}">ver detalles</a>
+                <p>Posted by {{this.postedBy.username}} {{this.postedBy.lastName}}</p>
+                 <a href="/foodstand/{{this.id}}">ver detalles</a>
+                 
             </header>
         </div>
         {{/each}}
