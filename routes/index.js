@@ -5,6 +5,7 @@ const router  = express.Router();
 router.get("/", (req, res, next) => {
   if(req.user){
     let user = req.user;
+    
     res.render("index", {user});
   }else{
     res.render("index");

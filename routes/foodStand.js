@@ -18,54 +18,49 @@ router.get("/newFoodStand", (req, res) => {
 }); //end render
 
 //nuevo lugar (post)
-router.post("/newFoodStand",uploadCloud.single('photo'), (req, res, next) => {
-  
+router.post("/newFoodStand", uploadCloud.single('photo'), (req, res, next) => {
+
   const imgPath = req.file.url;
   const imgName = req.file.originalname;
-  const {name, descritpion, category, address,longitude, latitude} = req.body;
-  console.log(longitude)
-  console.log(latitude)
+  const { name, descritpion, category, address, longitude, latitude } = req.body;
   let postedBy = req.user.id;
   let location = { type: 'Point', coordinates: [longitude, latitude] };
-console.log(location.coordinates)
 
-  FoodStand.findOne({name}, "name", (err, place) => {
-    if( place !== null ) {
+  FoodStand.findOne({ name }, "name", (err, place) => {
+    if (place !== null) {
       res.render('/newFoodStand', { message: "Ya existe weee" });
       return;
     }
   });
-            
-  
-    
-    const newFoodStand = new FoodStand ({
-      postedBy:postedBy,
-      name: name,
-      descritpion,
-      category,
-      location: location,
-      address,
-      imgName,
-      imgPath
-    });
 
-    newFoodStand.save()
+  const newFoodStand = new FoodStand({
+    postedBy: postedBy,
+    name: name,
+    descritpion,
+    category,
+    location: location,
+    address,
+    imgName,
+    imgPath
+  });
+
+  newFoodStand.save()
     .then(() => {
       res.redirect('/')
     })
     .catch(e => {
       console.log(e)
     })
-   
-  });
-   //end post
+
+});
+//end post
 
 
 
 router.get("/foodStand", (req, res) => {
   FoodStand.find()
     .then(food => {
-      res.render("ironplace/foodStand", { foodStand });
+      res.render("ironplace/foodStand", { food});
     })
     .catch(error => {
       console.log(error);
@@ -97,19 +92,19 @@ router.get("foodStand/:id", (res, req) => {
 
 
 router.get('/removeStand/:id', (req, res) => {
-    Promise.all([
+  Promise.all([
     FoodStand.findByIdAndRemove(req.params.id),
     User.findOneAndUpdate(
-        {foodstand: req.params.id},
-        {$pull: {foodstand: req.params.id} },
-        {new: true}
+      { foodstand: req.params.id },
+      { $pull: { foodstand: req.params.id } },
+      { new: true }
     )
-    ])
+  ])
     .then(results => {
-    res.render("/foodStand")
+      res.render("/foodStand")
     })
     .catch(error => {
-        console.log(error);
+      console.log(error);
     })
 });
 module.exports = router;

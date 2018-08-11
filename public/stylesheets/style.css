@@ -3,13 +3,14 @@
   padding: 0; }
 
 body {
-  background: #FFFFFA; }
+  background: black;
+  background-image: url("/public/images/guerra.jpeg") fixed; }
 
 header {
   width: 100%; }
 
 header nav {
-  width: 98%;
+  width: 100%;
   max-width: 1000px;
   margin: 20px auto;
   background: #024959; }

@@ -94,6 +94,7 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
+
 //auth with google+
 
 router.get('/google', passport.authenticate('google', {
