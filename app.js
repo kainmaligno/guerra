@@ -8,10 +8,9 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
-const keys         = require('./config/keys');
 const session      = require("express-session");
 const MongoStore   = require("connect-mongo")(session);
-const LocalStrategy      = require('passport-local').Strategy;
+
 
 
 mongoose.Promise = Promise;
@@ -60,7 +59,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
-hbs.registerPartials(__dirname + 'views/partials');
+hbs.registerPartials(__dirname + '/views/partials');
 
 
 // default value for title local

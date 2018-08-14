@@ -12,18 +12,10 @@
         Nombre:
         <input  class="form-control"type="text" name="name" id="standName" placeholder="Nombre del Lugar">
         Descripcion:
-        <textarea  class="form-control" name="description" id="description" cols="30" rows="10" placeholder="Descripcion"></textarea>
-        
+        <textarea  class="form-control" name="description" id="description" cols="30" rows="10" placeholder="Descripcion" required></textarea>
+        <label for="category"> A que tipo pertenece tu Puesto</label>
         <br>
-        <div id="mapInfo">
-                    Address:
-                <input class="form-control" type="text"  required name="address" id="address">
-                <input type="hidden" name='latitude'   id="lat">
-                <input type="hidden" name="longitude"  id="lng">
-                <br>
-        </div>
-         <div id="map"></div>
-        <select class="form-control" name="category" id="category">
+         <select class="form-control" name="category" id="category">
             <option value="Tacos">Tacos</option>
             <option value="Tortas">Tortas</option>
             <option value="Hamburguesas">Hamburguesas</option>
@@ -34,6 +26,15 @@
             <option value="Chilakillers">Chilakillers</option>
             <option value="Otro">Otro</option>
         </select>
+        <div id="mapInfo">
+                    Address:
+                <input class="form-control" type="text"  required name="address" id="address">
+                <input type="hidden" name='latitude'   id="lat">
+                <input type="hidden" name="longitude"  id="lng">
+                <br>
+        </div>
+         <div id="map"></div>
+       
          <h2>Inmortaliza ese bello lugar lleno de grasa y tomale una foto</h2>
       <br>
       <input type="file" name="photo" value="uploadPic" />

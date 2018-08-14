@@ -2,11 +2,12 @@
   margin: 0;
   padding: 0; }
 
-body {
-  background-image: url("/public/images/guerra.jpeg") fixed; }
+html, body {
+  height: 100% !important;
+  width: 100% !important; 
 
-li {
-  color: red; }
+}
+
 
 header {
   width: 100%; }
@@ -81,4 +82,16 @@ section {
   flex-direction: row;
   color: black; }
 
-/*# sourceMappingURL=style.css.map */
+  .nuevobtn{
+    position: fixed !important;
+    bottom: 20px;
+    right: 20px;
+
+  }
+
+  .cardimg{
+    width: 100%;
+    height: auto;
+  }
+
+  

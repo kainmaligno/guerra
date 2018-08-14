@@ -22,22 +22,15 @@ router.post("/newFoodStand", uploadCloud.single('photo'), (req, res, next) => {
 
   const imgPath = req.file.url;
   const imgName = req.file.originalname;
-  const { name, descritpion, category, address, longitude, latitude } = req.body;
+  const { name, description, category, address, longitude, latitude } = req.body;
   let postedBy = req.user.id;
   let location = { type: 'Point', coordinates: [longitude, latitude] };
 
-  FoodStand.findOne({ name }, "name", (err, place) => {
-    if (place !== null) {
-      res.render('/newFoodStand', { message: "Ya existe usuario" });
-      return;
-    }
-    
-   });
 
   const newFoodStand = new FoodStand({
     postedBy: postedBy,
     name: name,
-    descritpion,
+    description,
     category,
     location: location,
     address,
@@ -76,24 +69,12 @@ router.get('/foodstand/:id', (req, res) => {
   .populate("postedBy")
   .then( post => {
     res.render('ironplace/foodDetails', {post, user})
+    console.log(post);
   })
       });
       
 router.get('/removeStand/:id', (req, res) => {
-  Promise.all([
-    FoodStand.findByIdAndRemove({_id: req.params.id}),
-    User.findOneAndUpdate(
-      {foodStand: req.params.id},
-      {$pull: {foodStand: req.params.id}},
-      {new: true}
-    )
-  ])
-  .then(results => {
-    res.redirect("/foodStands");
-  })
-  .catch(e => {
-    console.log(e);
-  });
+  
 });
 
 module.exports = router;

@@ -1,0 +1,27 @@
+ <nav class="grey darken-4">
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo"><img src="/images/guerra.jpeg" alt="guerra" width="70px" height="70px"></a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+       
+        <li><a href="/contact">Acerca de </a></li>
+       
+        {{#if user}}
+         <li><a href="/private-page">Perfil</a></li>
+        <li><a href="/logout"><i class="material-icons">exit_to_app</i></a></li>
+        {{else}}
+        <li><a href="/login"><i class="material-icons">input</i></a></li>
+        {{/if}}
+      </ul>
+    </div>
+  </nav>
+
+  <ul class="sidenav" id="mobile-demo">
+        <li><a href="/">Guerra de puestos</a></li>
+        <li><a href="/foodStands">Todos los  Puestos</a></li>
+        <li><a href="/contact">Acerca de </a></li>
+        <li><a href="/private-page">Perfil</a></li>
+        
+        <li><a href="/newFoodStand"><i class="material-icons">exit_to_app</i></a></li>
+  </ul>
+          

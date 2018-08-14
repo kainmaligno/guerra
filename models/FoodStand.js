@@ -3,7 +3,7 @@ const Schema  = mongoose.Schema;
 
 const foodStandSchema = new Schema({
     name:           String,
-    description:  String,
+    description:    String,
     imgPath: String,
     imgName: String,
     postedBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"},

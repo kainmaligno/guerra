@@ -1,22 +1,16 @@
 <div class="container col col-sm-8">
-  {{!-- <h1>{{title}}</h1> --}}
-  {{#if user}}
+  {{!--
+  <h1>{{title}}</h1> --}} {{#if user}}
   <h3>Bienvenido seas guerrero de la urbe {{user.username}}</h3>
-  <a href="/private-page" class="btn-danger btn">Pagina de perfil</a>
- {{/if}} 
+  {{!--
+  <a href="/private-page" class="btn-danger btn">Pagina de perfil</a> --}} {{/if}}
 </div>
+<div class="container">
+  <div class="row">
+{{#each Stand}}
 
-{{#each food}}
-<div class="row">
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img src="{{food.imgPath}}" alt="...">
-      <div class="caption">
-        <h3>{{food.name}}</h3>
-        <p>...</p>
-        <p><a href="/foodDetails" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
-    </div>
-  </div>
-</div> 
- {{/each}}
+    {{> cards this}}
+  
+{{/each}}
+</div>
+</div>
