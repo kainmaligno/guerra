@@ -2,7 +2,7 @@
   {{!-- <h1>{{title}}</h1> --}}
   {{#if user}}
   <h3>Bienvenido seas guerrero de la urbe {{user.username}}</h3>
-  <a href="/private-page" class="btn-danger btn">Private page huvos</a>
+  <a href="/private-page" class="btn-danger btn">Pagina de perfil</a>
  {{/if}} 
 </div>
 
@@ -10,9 +10,9 @@
 <div class="row">
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-      <img src="{{food.name}}" alt="...">
+      <img src="{{food.imgPath}}" alt="...">
       <div class="caption">
-        <h3>{{FoodStand.postedBy.username}}</h3>
+        <h3>{{food.name}}</h3>
         <p>...</p>
         <p><a href="/foodDetails" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
       </div>

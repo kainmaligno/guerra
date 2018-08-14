@@ -78,9 +78,7 @@ router.get('/foodstand/:id', (req, res) => {
   .populate("postedBy")
   .then( post => {
     res.render('ironplace/foodDetails', {post, user})
-   
   })
-  
       });
       
 

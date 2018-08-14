@@ -2,7 +2,7 @@
 <header>
     <h1>Este Local ha sido aportado por el guerrero urbano: <span style="color:red">{{post.postedBy.username}},{{post.postedBy.lastName}}</span></h1>
 </header>
-<a href="#">checka mi perfil</a>
+{{!-- <a href="/private-page/{{user._id}}">checka mi perfil</a> --}}
 <body>
     <div id="detalle">
          <h1>{{post.name}}</h1> <p>Lugar ubicado en :<span>{{post.address}}</span></p>
@@ -16,17 +16,17 @@
 
     <div class="drivepanel-details">
         <a href="/foodStand" class="btn btn-primary">Regresar a generales</a>
-        <a href="/post">Postea</a>
+        {{!-- <a href="/post">Postea</a> --}}
     </div>
 </body>
 <footer>
 {{#if user}}
 <div>
-<p>Aportado por:
+{{!-- <p>Aportado por:
     <i>{{post.postedBy.username}}</i>
     lo quieres
 <a id="borrar" onclick="return confirm('Estás seguro que deseas eliminar el Lugar?');" href="/removeStands/{{post._id}}">borrar?</a>
-</p>
+</p> --}}
 </div>
 {{/if}}
 

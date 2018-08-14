@@ -2,7 +2,7 @@
     <h2>La guerra es aqui y ahora </h2>
     <div class="show-stands">
         {{#each food}}
-        <div class="stand-container">
+        {{!-- <div class="stand-container">
             <header class="stand-header">
                 <img  class="img-stand" src="{{this.imgPath}}" alt="stands" width="100">
                 <p>{{this.name}}</p>
@@ -11,7 +11,21 @@
                  <a href="/foodstand/{{this.id}}">ver detalles</a>
                  
             </header>
-        </div>
+        </div> --}}
+
+        <div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img src="{{this.imgPath}}" alt="...">
+      <div class="caption">
+        <h3>{{this.name}}</h3>
+        <p>Posted by {{this.postedBy.username}} {{this.postedBy.lastName}}</p>
+        <p>...</p>
+        <p><a href="/foodstand/{{this.id}}" class="btn btn-primary" role="button">Detalles</a> <a href="/perfil" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+</div> 
         {{/each}}
    
     </div>
