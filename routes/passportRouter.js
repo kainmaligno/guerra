@@ -2,6 +2,7 @@ const express        = require("express");
 const router         = express.Router();
 // User model
 const User           = require("../models/user");
+const FoodStand = require("../models/FoodStand");
 // Bcrypt to encrypt passwords
 const bcrypt         = require("bcryptjs");
 const bcryptSalt     = 10;
@@ -28,12 +29,7 @@ router.post(
   })
 );
 
-// router.post('/login', passport.authenticate('local-login', {
-//   successRedirect : '/',
-//   failureRedirect : '/login',
-//   failureFlash : true,
-//   passReqToCallback: false
-//   }));
+
     
 
 //signup
@@ -77,16 +73,24 @@ router.post("/signup", uploadCloud.single('photo'),(req, res, next) => {
     })
     .then(newUser => {
       res.redirect("/");
-      console.log('ya triunfaste CHINGON')
+      console.log('user saved succesfully')
     })
     .catch(e => {
       res.render("auth/signup", { message: e.message });
-      console.log('no guardaste ni madres PUTO');
+      console.log('there is a problem');
     });
 });
 
 router.get("/private-page", ensureLoggedIn(), (req, res) => {
-  res.render("auth/private", { user: req.user });
+  let user = req.user;
+  const id = req.params.id;
+  User.findById(id )
+  .populate("postedBy")
+  .then(show => {
+    res.render("auth/private", { show, user });
+    console.log(show + user );
+  })
+  
 });
 
 router.get("/logout", (req, res) => {
@@ -103,8 +107,6 @@ router.get('/google', passport.authenticate('google', {
   ]
 }));
 
-//callback route for google redirect to
-//hand control to passport to use code to grab profile info
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
   res.redirect('/');
 });
@@ -112,18 +114,6 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
 
 
 module.exports = router;
-
-
-
-// router.get('/signup', ensureLoggedOut(), (req, res) => {
-//   res.render('auth/signup', { message: req.flash('error')});
-// });
-
-// router.post('/signup', [ensureLoggedOut(), uploadCloud.single('profile'), passport.authenticate('local-signup', {
-//   successRedirect : '/',
-//   failureRedirect : '/signup',
-//   failureFlash : true
-// })]);
 
 
 

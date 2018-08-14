@@ -1,13 +1,23 @@
 
 {{#if user}}
   <div>
-    <h1>Who's the best developer?</h1>
-    <h1>You are, <span style="color: red;">{{ user.username}}</span>. You are. </h1>
+    <h1>Quien es el mas tragon de la Ciudad?</h1>
+    <h1>Tu eres, <span style="color: red;">{{ user.username}}</span>. Tu eres... </h1>
     <img src="http://media.giphy.com/media/UsK5GqD3e0huU/giphy.gif" alt="You rock.">
-    <img src="{{this.user.imgPath}}" alt="miperfil">
+  </div>
+  <div class="imgPerfil">
+     <img src="{{this.user.imgPath}}" alt="miperfil">
+  </div>
+    <div class="misPuestos"> Mis lugares {{#each show}}
+            <p>
+                <a href="/places/{{this._id}}">{{this.name}}</a>
+            </p>
+            {{/each}}
+    </div>
+  <div class="botonera">
     <a href="/" class="btn btn-primary">Index</a>
     <a href="/newFoodStand" class="btn btn-primary">Agrega un local nuevo</a>
     <a href="/foodStand" class="btn btn-primary">Todos los puestos</a>
-  </div>
-  <a href="/logout" class="btn btn-primary">Logout</a>
+    <a href="/logout" class="btn btn-primary">Logout</a>
+  </div> 
 {{/if}}

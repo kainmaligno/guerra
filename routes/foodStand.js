@@ -28,7 +28,7 @@ router.post("/newFoodStand", uploadCloud.single('photo'), (req, res, next) => {
 
   FoodStand.findOne({ name }, "name", (err, place) => {
     if (place !== null) {
-      res.render('/newFoodStand', { message: "Ya existe weee" });
+      res.render('/newFoodStand', { message: "Ya existe usuario" });
       return;
     }
     
@@ -56,13 +56,12 @@ router.post("/newFoodStand", uploadCloud.single('photo'), (req, res, next) => {
 });
 //end post
 
-
-
 router.get("/foodStand",  (req, res) => {
   FoodStand.find().populate('postedBy')
     .then(food => {
-      //console.log(food);
+      console.log(food);
       res.render("ironplace/foodStand", {food, user: req.user});
+      //console.log(food)
     })
     .catch(error => {
       console.log(error);
@@ -70,19 +69,37 @@ router.get("/foodStand",  (req, res) => {
 }); //end render food
 
 
-router.get('/foodstand/:id', (req, res)=>{
-  FoodStand.find().populate('postedBy')
-  .then(detail => {
-    console.log(detail)
-    res.render('ironplace/foodDetails', { detail, id: req.params.id, user: req.user})
+router.get('/foodstand/:id', (req, res) => {
+  const user = req.user;
+  const id = req.params.id;
+
+  console.log(id);
+  FoodStand.findById({_id: req.params.id} )
+  .populate("postedBy")
+  .then( post => {
+    res.render('ironplace/foodDetails', {post, user})
+   
   })
-  .catch(error => {
-    console.log(error)
-  });
- 
-});//end detalles
+  
+      });
+      
+
+
 
 router.get('/removeStand/:id', (req, res) => {
-  
+  Promise.all([
+    FoodStand.findByIdAndRemove({_id: req.params.id}),
+    User.findOneAndUpdate(
+      {foodStand: req.params.id},
+      {$pull: {foodStand: req.params.id}},
+      {new: true}
+    )
+  ])
+  .then(results => {
+    res.redirect("/foodStands");
+  })
+  .catch(e => {
+    console.log(e);
+  });
 });
 module.exports = router;

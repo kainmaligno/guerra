@@ -1,18 +1,58 @@
 
+<header>
+    <h1>Este Local ha sido aportado por el guerrero urbano: <span style="color:red">{{post.postedBy.username}},{{post.postedBy.lastName}}</span></h1>
+</header>
+<a href="#">checka mi perfil</a>
+<body>
+    <div id="detalle">
+         <h1>{{post.name}}</h1> <p>Lugar ubicado en :<span>{{post.address}}</span></p>
+    <img src="{{post.imgPath}}" alt="event_picture" height="600px" width="600px">
+    
+    </div>
+    
+    <div class="detalle-mapa" id="map">
+       
+    </div>
 
-<div id="map"></div>
-
-
-
+    <div class="drivepanel-details">
+        <a href="/foodStand" class="btn btn-primary">Regresar a generales</a>
+        <a href="/post">Postea</a>
+    </div>
+</body>
+<footer>
 {{#if user}}
 <div>
 <p>Aportado por:
-    <i>{{user.username}}</i>
+    <i>{{post.postedBy.username}}</i>
     lo quieres
-<a id="borrar" onclick="return confirm('Estás seguro que deseas eliminar el Lugar?');" href="/removepl/{{place._id}}">borrar?</a>
+<a id="borrar" onclick="return confirm('Estás seguro que deseas eliminar el Lugar?');" href="/removeStands/{{post._id}}">borrar?</a>
 </p>
 </div>
-
 {{/if}}
 
+</footer>
+
 <script    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-14hVewjP3BDtGFfOsy36obNYblwSapk&libraries=places"></script>
+ <script>
+  let center = {
+        lat:{{post.location.coordinates.[1]}},
+        lng:{{post.location.coordinates.[0]}}
+    };
+    let title = '{{post.name}}';
+    let address = '{{post.address}}';
+
+    const map = new google.maps.Map(
+        document.getElementById('map'),
+        {
+            center,
+            zoom:15
+        }
+    )
+    const marker = new google.maps.Marker({
+        map,
+        position:center,
+        title,
+        address,
+        animation: google.maps.Animation.BOUNCE
+    })
+ </script>
