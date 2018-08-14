@@ -15,6 +15,13 @@ const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
  require('../config/passport');
 //login
 
+
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  return res.redirect("/login");
+}
+
+
 router.get("/login", (req, res, next) => {
   res.render("auth/login");
 });
@@ -83,14 +90,7 @@ router.post("/signup", uploadCloud.single('photo'),(req, res, next) => {
 
 router.get("/private-page", ensureLoggedIn(), (req, res) => {
   let user = req.user;
-  const id = req.params.id;
-  User.findById(id )
-  .populate("postedBy")
-  .then(show => {
-    res.render("auth/private", { show, user });
-    console.log(show + user );
-  })
-  
+    res.render("auth/private", {  user });  
 });
 
 router.get("/logout", (req, res) => {

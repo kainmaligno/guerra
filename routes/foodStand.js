@@ -59,7 +59,7 @@ router.post("/newFoodStand", uploadCloud.single('photo'), (req, res, next) => {
 router.get("/foodStand",  (req, res) => {
   FoodStand.find().populate('postedBy')
     .then(food => {
-      console.log(food);
+      
       res.render("ironplace/foodStand", {food, user: req.user});
       //console.log(food)
     })
@@ -72,8 +72,6 @@ router.get("/foodStand",  (req, res) => {
 router.get('/foodstand/:id', (req, res) => {
   const user = req.user;
   const id = req.params.id;
-
-  console.log(id);
   FoodStand.findById({_id: req.params.id} )
   .populate("postedBy")
   .then( post => {
@@ -81,9 +79,6 @@ router.get('/foodstand/:id', (req, res) => {
   })
       });
       
-
-
-
 router.get('/removeStand/:id', (req, res) => {
   Promise.all([
     FoodStand.findByIdAndRemove({_id: req.params.id}),
@@ -100,4 +95,5 @@ router.get('/removeStand/:id', (req, res) => {
     console.log(e);
   });
 });
+
 module.exports = router;

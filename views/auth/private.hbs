@@ -1,20 +1,29 @@
+ {{#if user}}
+<div class="profile-c">
+  <h1>Quien es el mas tragon de la Ciudad?</h1>
+  <h1>Tu eres,
+    <span style="color: red;">{{ user.username}}</span>. Tu eres... </h1>
+  <img src="http://media.giphy.com/media/UsK5GqD3e0huU/giphy.gif" alt="You rock.">
+</div>
+<div class="imgPerfil">
+  <img src="{{this.user.imgPath}}" alt="miperfil">
+</div>
 
-{{#if user}}
-  <div>
-    <h1>Quien es el mas tragon de la Ciudad?</h1>
-    <h1>Tu eres, <span style="color: red;">{{ user.username}}</span>. Tu eres... </h1>
-    <img src="http://media.giphy.com/media/UsK5GqD3e0huU/giphy.gif" alt="You rock.">
-  </div>
-  <div class="imgPerfil">
-     <img src="{{this.user.imgPath}}" alt="miperfil">
-  </div>
-    <div class="misPuestos"> Mis lugares 
-      
-    </div>
-  <div class="botonera">
-    <a href="/" class="btn btn-primary">Index</a>
-    <a href="/newFoodStand" class="btn btn-primary">Agrega un local nuevo</a>
-    <a href="/foodStand" class="btn btn-primary">Todos los puestos</a>
-    <a href="/logout" class="btn btn-primary">Logout</a>
-  </div> 
+<div class="botonera">
+  <a href="/" class="btn btn-primary">Index</a>
+  <a href="/newFoodStand" class="btn btn-primary">Agrega un local nuevo</a>
+  <a href="/foodStand" class="btn btn-primary">Todos los puestos</a>
+  <a href="/logout" class="btn btn-primary">Logout</a>
+</div>
 {{/if}}
+
+<div>
+    {{#each show}}
+ 
+  <a href="/foodstand/{{this.id}}">
+    <p>{{this.name}}</p>
+  </a>
+
+
+    {{/each}}
+</div>

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const comentSchema = new Schema({
 
-    postedBy: {
+    comentBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User' //referenciamos al modelo user al autor de cada comentario
     },

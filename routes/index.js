@@ -21,5 +21,8 @@ router.get("/", (req, res, next) => {
   }
  
 });
-
+router.get('/contact',(req, res) => {
+  let user = req.user;
+  res.render('contact',{user});
+})
 module.exports = router;

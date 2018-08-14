@@ -3,8 +3,10 @@
   padding: 0; }
 
 body {
-  background: black;
   background-image: url("/public/images/guerra.jpeg") fixed; }
+
+li {
+  color: red; }
 
 header {
   width: 100%; }
@@ -73,5 +75,10 @@ section {
 #map {
   height: 400px;
   width: 100%; }
+
+#profile-c {
+  display: flex;
+  flex-direction: row;
+  color: black; }
 
 /*# sourceMappingURL=style.css.map */

@@ -14,10 +14,10 @@
 }
 
 body {
-	background: black;
 	background-image: url('/public/images/guerra.jpeg')fixed
 }
 
+li{ color: red;}
 
 //** HEADER **//
 header {
@@ -111,3 +111,11 @@ section {
 	width:100%;
   }
 
+
+  //PROFILE
+
+#profile-c{
+	display: flex;
+	flex-direction: row;
+	color:black;
+}  
